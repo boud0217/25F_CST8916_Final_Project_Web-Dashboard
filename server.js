@@ -31,7 +31,7 @@ const container = database.container(process.env.COSMOS_CONTAINER);
  */
 app.get('/api/latest', async (req, res) => {
     try {
-        const locations = ["Dow's Lake", "Fifth Avenue", "NAC"];
+        const locations = ["Dows-Lake", "Fifth-Avenue", "NAC"];
         const results = [];
 
         for (const location of locations) {
@@ -92,7 +92,7 @@ app.get('/api/history/:location', async (req, res) => {
 
         // Sort by windowEndTime descending and limit
         resources.sort((a, b) =>
-            new Date(b.windowEndTime) - new Date(a.windowEndTime)
+            new Date(b.timestamp) - new Date(a.timestamp)
         );
 
         const limitedResults = resources.slice(0, limit);

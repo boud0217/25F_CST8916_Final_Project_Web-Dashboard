@@ -66,16 +66,15 @@ function updateLocationCards(locations) {
 
         // Update metrics
         document.getElementById(`ice-${locationKey}`).textContent =
-            location.avgIceThickness.toFixed(1);
+            location.AvgIceThickness.toFixed(1);
         document.getElementById(`temp-${locationKey}`).textContent =
-            location.avgSurfaceTemperature.toFixed(1);
+            location.AvgSurfaceTemperature.toFixed(1);
         document.getElementById(`snow-${locationKey}`).textContent =
-            location.maxSnowAccumulation.toFixed(1);
-
+            location.MaxSnowAccumulation.toFixed(1);
         // Update safety status
         const statusBadge = document.getElementById(`status-${locationKey}`);
-        statusBadge.textContent = location.safetyStatus;
-        statusBadge.className = `safety-badge ${location.safetyStatus.toLowerCase()}`;
+        statusBadge.textContent = location.SafetyStatus;
+        statusBadge.className = `safety-badge ${location.SafetyStatus.toLowerCase()}`;
     });
 }
 
@@ -106,10 +105,10 @@ function updateLastUpdateTime() {
  */
 async function updateCharts() {
     try {
-        const locations = ["Dow's Lake", "Fifth Avenue", "NAC"];
+        const locations = ["Dows-Lake", "Fifth-Avenue", "NAC"];
         const colors = {
-            "Dow's Lake": 'rgb(75, 192, 192)',
-            "Fifth Avenue": 'rgb(255, 99, 132)',
+            "Dows-Lake": 'rgb(75, 192, 192)',
+            "Fifth-Avenue": 'rgb(255, 99, 132)',
             "NAC": 'rgb(54, 162, 235)'
         };
 
@@ -127,7 +126,7 @@ async function updateCharts() {
         // Prepare chart data
         const iceDatasets = historicalData.map(({ location, data }) => ({
             label: location,
-            data: data.map(d => d.avgIceThickness),
+            data: data.map(d => d.AvgIceThickness),
             borderColor: colors[location],
             backgroundColor: colors[location] + '33',
             tension: 0.4,
@@ -136,7 +135,7 @@ async function updateCharts() {
 
         const tempDatasets = historicalData.map(({ location, data }) => ({
             label: location,
-            data: data.map(d => d.avgSurfaceTemperature),
+            data: data.map(d => d.AvgSurfaceTemperature),
             borderColor: colors[location],
             backgroundColor: colors[location] + '33',
             tension: 0.4,
@@ -234,8 +233,8 @@ async function updateCharts() {
  */
 function getLocationKey(location) {
     const keyMap = {
-        "Dow's Lake": "dows",
-        "Fifth Avenue": "fifth",
+        "Dows-Lake": "dows",
+        "Fifth-Avenue": "fifth",
         "NAC": "nac"
     };
     return keyMap[location] || location.toLowerCase().replace(/[^a-z]/g, '');
